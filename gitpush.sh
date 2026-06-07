@@ -1,4 +1,5 @@
 #!/bin/bash
+#### Script to push the changes to github #############
 
 if [ -z "$1" ]; then
     echo "Usage: ./gitpush.sh \"commit message\""
