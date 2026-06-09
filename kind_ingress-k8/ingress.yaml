@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-flask-ingress
+  annotations:
+    # Tells Kubernetes to use the NGINX Ingress Controller
+    kubernetes.io/ingress.class: "nginx"
+    # Optional: Increases proxy buffers if your Flask app sends large headers/responses
+    nginx.ingress.kubernetes.io/proxy-body-size: "8m"
+spec:
+  rules:
+  - host: virtual.labs.com       #flask.local  # Replace this with your actual domain or leave for local testing
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hello-flask-service  # Must exactly match your Service name
+            port:
+              number: 5000             # Must match the 'port' defined in your Service
